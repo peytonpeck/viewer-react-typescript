@@ -6,7 +6,7 @@ class App extends Component {
   render () { 
     return (
       <div className="App">
-        <Viewer id="viewer1"/>
+        <Viewer id="MyViewerDiv"/>
         <Viewer id="viewer2"/>
       </div>
     );

@@ -101,7 +101,6 @@ class Viewer extends React.Component<Props> {
   async onDocumentLoadSuccess(doc: Autodesk.Viewing.Document) {
     // A document contains references to 3D and 2D viewables.
     var items = doc.getRoot().search({
-      'type': 'geometry',
       'role': '3d'
     });
     if (items.length === 0) {
