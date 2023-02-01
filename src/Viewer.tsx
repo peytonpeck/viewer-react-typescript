@@ -1,20 +1,26 @@
-import { Component } from 'react';
+import React from 'react';
 import './Viewer.css';
 
-class Viewer extends Component {
+interface Props {
+  id: string;
+}
+
+class Viewer extends React.Component<Props> {
   embedURLfromA360: string; 
   viewer?: Autodesk.Viewing.GuiViewer3D;
+  id: string;
 
-  constructor(props:any) { 
+  constructor(props: Props) { 
     // Note: in strict mode this will be called twice
     // https://stackoverflow.com/questions/55119377/react-js-constructor-called-twice
     super(props);  
+    this.id = props.id;
     this.embedURLfromA360 = "https://myhub.autodesk360.com/ue29c89b7/shares/public/SH7f1edQT22b515c761e81af7c91890bcea5?mode=embed"; // Revit file (A360/Forge/Napa.rvt)    
   }
 
   render() {
     return (
-      <div className="Viewer" id="MyViewerDiv" />
+      <div className="Viewer" id={this.id} />
     );
   }
 
@@ -96,14 +102,14 @@ class Viewer extends Component {
     // A document contains references to 3D and 2D viewables.
     var items = doc.getRoot().search({
       'type': 'geometry',
-      'role': '2d'
+      'role': '3d'
     });
     if (items.length === 0) {
       console.error('Document contains no viewables.');
       return;
     }
 
-    var viewerDiv: any = document.getElementById('MyViewerDiv');
+    var viewerDiv: any = document.getElementById(this.id);
     this.viewer = new Autodesk.Viewing.GuiViewer3D(viewerDiv);
     this.viewer.start();
 
